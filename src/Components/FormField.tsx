@@ -6,6 +6,7 @@ import {
     SelectValue,
 } from "./ui/select";
 import { Switch } from "./ui/react-switch";
+import EditableLabel from "./ui/editableFieldName"
 import { IntailDataType } from '../utils/formData/formDataTypes';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { IoMdAddCircleOutline } from 'react-icons/io'
@@ -17,9 +18,6 @@ interface Props {
     updateFieldValue: (id: string, value: boolean | string, prop: any) => void;
     removeField: (id: string) => void;
 }
-
-
-
 function FormField({ fields, addSubfield, updateFieldValue, removeField }: Props) {
     const [isHovered, setIsHovered] = useState(false);
     const [newFile, setNewFile] = useState({
@@ -29,7 +27,7 @@ function FormField({ fields, addSubfield, updateFieldValue, removeField }: Props
         isObjectOrArray: false,
         subfields: []
     })
-    console.log('FORMFIELD   ' + fields.id);
+
 
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -59,13 +57,15 @@ function FormField({ fields, addSubfield, updateFieldValue, removeField }: Props
     function handleDeleteClick() {
         removeField(fields.id);
     }
-
+    function handleFieldNameChange(newName: string) {
+        updateFieldValue(fields.id, newName, 'fieldname');
+    }
 
     return (
         <div >
             <div className="flex justify-between pl-2 hover:bg-violet-300 hover:opacity-90 border-b border-white" onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}>
-                <div ><span className="text-black">{fields.fieldname} </span>
+                <div ><span className="text-black"><EditableLabel text={fields.fieldname} onChange={handleFieldNameChange} /> </span>
                     <span>
                         <div className="inline-flex p-1">
                             <Select value={fields.type} onValueChange={handleValueChange} >
