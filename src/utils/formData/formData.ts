@@ -53,7 +53,7 @@ const intailData: IntailDataType = {
         {
             id: '2',
             fieldname: 'order',
-            isObjectOrArray: false,
+            isObjectOrArray: true,
             type: "arr",
             required: true,
             subfields: []
