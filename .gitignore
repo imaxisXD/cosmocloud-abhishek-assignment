@@ -1,0 +1,14 @@
+# Ignore build output
+.next/
+
+# Ignore environment variables file
+.env.local
+
+# Ignore npm modules
+node_modules/
+
+# Ignore development files
+package-lock.json
+yarn.lock
+*.log
+.DS_Store
