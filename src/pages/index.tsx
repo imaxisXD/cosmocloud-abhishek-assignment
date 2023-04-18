@@ -7,7 +7,7 @@ import { searchField } from '@/utils/lib/utils';
 import Link from 'next/link';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { IoMdAddCircleOutline } from 'react-icons/io'
-
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -21,9 +21,10 @@ import {
 } from "../Components/ui/alert";
 
 
+
 export default function Home() {
   const [formData, setFormData] = useState(intailData);
-
+  const [parent] = useAutoAnimate();
   function updateFieldValue(fieldId: string, value: string | boolean, property: keyof IntailDataType) {
     const updatedFormData = { ...formData };
     const updateField = (fields: IntailDataType) => {
@@ -108,7 +109,7 @@ export default function Home() {
   }
   return (
     <main className='fixed inset-0 flex items-center justify-center bg-gradient-to-r from-purple-800 via-violet-900 to-purple-800'>
-      <div className='bg-slate-200 w-10/12 p-4 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 absolute border border-white rounded-lg'>
+      <div className='bg-slate-200 w-10/12 p-4 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 absolute border border-white rounded-lg' >
         <div className='flex justify-between'>
           <div>
             <button onClick={handleAddClick} className='p-2 ml-1 mr-3 cursor-pointer border bg-green-300 hover:bg-green-300/60 rounded-full'>< IoMdAddCircleOutline /></button>
@@ -137,7 +138,7 @@ export default function Home() {
             </AlertDialog>
           </div>
         </div>
-        <div className='block'>
+        <div className='block' ref={parent} >
           {formData.subfields.map((fields) => {
             return (
               <FormField key={fields.id} fields={fields} updateFieldValue={updateFieldValue} addSubfield={addSubfield} removeField={removeField} />

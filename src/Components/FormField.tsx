@@ -11,6 +11,8 @@ import { IntailDataType } from '../utils/formData/formDataTypes';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { IoMdAddCircleOutline } from 'react-icons/io'
 import { useState } from "react";
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+
 
 interface Props {
     fields: IntailDataType;
@@ -26,7 +28,8 @@ function FormField({ fields, addSubfield, updateFieldValue, removeField }: Props
         required: false,
         isObjectOrArray: false,
         subfields: []
-    })
+    });
+    const [parent] = useAutoAnimate();
 
 
     const handleMouseEnter = () => {
@@ -62,7 +65,7 @@ function FormField({ fields, addSubfield, updateFieldValue, removeField }: Props
     }
 
     return (
-        <div >
+        <div ref={parent}>
             <div className="flex justify-between pl-2 hover:bg-violet-300 hover:opacity-90 border-b border-white" onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}>
                 <div ><span className="text-black"><EditableLabel text={fields.fieldname} onChange={handleFieldNameChange} /> </span>
